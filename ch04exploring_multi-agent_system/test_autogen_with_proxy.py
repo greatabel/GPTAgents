@@ -74,8 +74,8 @@ async def main():
         system_message="You are a helpful assistant with access to tools."
     )
     
-    # 设置终止条件（最多 5 条消息）
-    termination = MaxMessageTermination(5)
+    # 设置终止条件（最多 3 条消息）
+    termination = MaxMessageTermination(3)
     
     # 创建团队
     team = RoundRobinGroupChat([assistant], termination_condition=termination)

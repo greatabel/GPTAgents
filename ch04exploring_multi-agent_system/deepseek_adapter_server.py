@@ -36,31 +36,41 @@ def build_tool_prompt(tools: List[Dict[str, Any]]) -> str:
 
 {tools_text}
 
-CRITICAL RULES FOR CALLING FUNCTIONS:
-1. When you need to call a function, output ONLY this XML format:
+CRITICAL WORKFLOW - FOLLOW EXACTLY:
+
+**FIRST TIME USER ASKS:**
+1. Output ONLY the XML function call:
 <function_call>
 {{"name": "function_name", "arguments": {{"param": "value"}}}}
 </function_call>
 
-2. DO NOT add any text before or after the XML block
-3. DO NOT explain what you're doing
-4. DO NOT say "I will call" or "Let me use" - just output the XML directly
-5. The JSON inside XML must be valid
+**AFTER RECEIVING FUNCTION RESULT:**
+2. Respond in natural language with the result
+3. DO NOT output any XML
+4. DO NOT call the function again
+5. STOP after providing the result
 
-EXAMPLES:
-User: "What's the weather in Beijing?"
-Your response:
-<function_call>
-{{"name": "get_weather", "arguments": {{"city": "Beijing"}}}}
-</function_call>
+EXAMPLE - CORRECT BEHAVIOR:
+User: "call myecho with text HELLO"
 
-User: "Call myecho with text HELLO"
-Your response:
+Your 1st response:
 <function_call>
 {{"name": "myecho", "arguments": {{"text": "HELLO"}}}}
 </function_call>
 
-IMPORTANT: After a function is called and you receive the result, provide a natural language response to the user based on the function result. DO NOT call the function again."""
+System: Function myecho returned: <<ECHO: HELLO>>
+
+Your 2nd response:
+The function has been called and returned: <<ECHO: HELLO>>
+[STOP HERE - Do not call myecho again]
+
+EXAMPLE - WRONG BEHAVIOR (DO NOT DO THIS):
+Your 2nd response:
+<function_call>                          ❌ WRONG! Do not call again!
+{{"name": "myecho", "arguments": {{"text": "HELLO"}}}}
+</function_call>
+
+REMEMBER: Call function ONCE, then provide natural language response."""
 
 
 def extract_xml_tool_calls(content: str) -> Optional[List[Dict[str, Any]]]:
