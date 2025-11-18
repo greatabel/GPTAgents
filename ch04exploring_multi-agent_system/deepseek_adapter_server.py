@@ -2,8 +2,8 @@
 """
 DeepSeek V3.2-Exp Tool Calling 代理服务器 (修复版)
 """
-
 import json
+import os
 import re
 import httpx
 from typing import Any, Dict, List, Optional
@@ -14,8 +14,18 @@ import uvicorn
 app = FastAPI(title="DeepSeek Tool Calling Proxy")
 
 # 远程 DeepSeek API 配置
-DEEPSEEK_API_URL = "http://10.248.60.236:5000/v1/chat/completions"
-DEEPSEEK_API_KEY = "sk-i7aFdS6UvglMyX2vWMrDccwsPeIK"
+DEEPSEEK_API_URL = os.getenv(
+    "DEEPSEEK_API_URL", 
+    "http://10.248.60.236:5000/v1/chat/completions"
+)
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_OPENAI_API_KEY")
+
+# 启动时验证配置
+if not DEEPSEEK_API_KEY:
+    raise ValueError(
+        "❌ 环境变量 DEEPSEEK_OPENAI_API_KEY 未设置！\n"
+        "请运行: export DEEPSEEK_OPENAI_API_KEY='your-api-key'"
+    )
 
 
 def build_tool_prompt(tools: List[Dict[str, Any]]) -> str:
