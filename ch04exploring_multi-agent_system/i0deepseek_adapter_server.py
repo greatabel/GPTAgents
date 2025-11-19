@@ -202,7 +202,7 @@ async def chat_completions(request: Request):
         is_stream = body.get("stream", False)  # ⭐ 获取客户端的流式请求
         
         print(f"\n{'='*60}")
-        print(f"📨 收到请求:")
+        print(f"📨 收到请求:{messages}")
         print(f"   消息数: {len(messages)}")
         print(f"   工具数: {len(tools) if tools else 0}")
         print(f"   客户端请求流式: {is_stream}")
