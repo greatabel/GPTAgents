@@ -1,0 +1,9 @@
+[
+    {
+        "model": "deepseek-chat",
+        "api_key": "dummy",
+        "base_url": "http://localhost:8000/v1",
+        "api_type": "openai",
+        "tags": ["deepseek", "tool", "function_calling"]
+    }
+]

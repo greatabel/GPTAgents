@@ -1,14 +1,15 @@
-# deepseek_proxy_server.py (修复版)
+# deepseek_proxy_server.py (支持流式版本)
 """
-DeepSeek V3.2-Exp Tool Calling 代理服务器 (修复版)
+DeepSeek V3.2-Exp Tool Calling 代理服务器 (支持流式)
 """
+
 import json
 import os
 import re
 import httpx
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, AsyncIterator
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 import uvicorn
 
 app = FastAPI(title="DeepSeek Tool Calling Proxy")
@@ -74,12 +75,6 @@ Your 2nd response:
 The function has been called and returned: <<ECHO: HELLO>>
 [STOP HERE - Do not call myecho again]
 
-EXAMPLE - WRONG BEHAVIOR (DO NOT DO THIS):
-Your 2nd response:
-<function_call>                          ❌ WRONG! Do not call again!
-{{"name": "myecho", "arguments": {{"text": "HELLO"}}}}
-</function_call>
-
 REMEMBER: Call function ONCE, then provide natural language response."""
 
 
@@ -88,7 +83,6 @@ def extract_xml_tool_calls(content: str) -> Optional[List[Dict[str, Any]]]:
     if not content or "<function_call>" not in content:
         return None
     
-    # 提取所有 <function_call>...</function_call> 块
     pattern = r'<function_call>\s*(\{.*?\})\s*</function_call>'
     matches = re.findall(pattern, content, re.DOTALL)
     
@@ -121,33 +115,21 @@ def extract_xml_tool_calls(content: str) -> Optional[List[Dict[str, Any]]]:
 
 
 def filter_messages_for_deepseek(messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """
-    过滤和转换消息，使其适合 DeepSeek 模型
-    
-    关键处理：
-    1. 移除 tool_calls 字段（DeepSeek 不需要在历史中看到这个）
-    2. 将 tool role 的消息转换为 user role（DeepSeek 更容易理解）
-    """
+    """过滤和转换消息，使其适合 DeepSeek 模型"""
     filtered = []
     
     for msg in messages:
         role = msg.get("role")
         
         if role == "system":
-            # 保留系统消息（会被我们的工具提示词覆盖）
             filtered.append(msg)
         
         elif role == "user":
-            # 保留用户消息
             filtered.append(msg)
         
         elif role == "assistant":
-            # 移除 tool_calls，只保留文本内容
             content = msg.get("content", "")
             
-            # 如果 assistant 消息有 tool_calls 但没有 content
-            # 说明这是一个纯工具调用消息，我们跳过它
-            # （因为 DeepSeek 会重新生成工具调用）
             if msg.get("tool_calls") and not content:
                 print(f"   ⚠️  跳过空的 assistant 工具调用消息")
                 continue
@@ -158,8 +140,6 @@ def filter_messages_for_deepseek(messages: List[Dict[str, Any]]) -> List[Dict[st
             })
         
         elif role == "tool":
-            # 将 tool 消息转换为 user 消息
-            # 格式：Function <name> returned: <content>
             tool_name = msg.get("name", "unknown")
             tool_content = msg.get("content", "")
             
@@ -172,33 +152,71 @@ def filter_messages_for_deepseek(messages: List[Dict[str, Any]]) -> List[Dict[st
     return filtered
 
 
+def should_use_streaming(messages: List[Dict[str, Any]], tools: Optional[List]) -> bool:
+    """
+    判断是否应该使用流式响应
+    
+    规则：
+    1. 如果没有工具定义 → 可以流式
+    2. 如果有工具，但历史消息中已有 tool role → 不需要流式（这是第二轮回复）
+    3. 如果有工具，且是首次请求 → 不能流式（需要解析 XML）
+    """
+    # 没有工具定义，直接流式
+    if not tools:
+        return True
+    
+    # 检查消息中是否有 tool role
+    has_tool_result = any(msg.get("role") == "tool" for msg in messages)
+    
+    # 如果有工具结果，说明这是第二轮回复，可以流式
+    if has_tool_result:
+        print(f"   ℹ️  检测到工具结果，第二轮回复可以使用流式")
+        return True
+    
+    # 否则，这是首次工具调用请求，必须非流式
+    print(f"   ℹ️  首次工具调用请求，使用非流式")
+    return False
+
+
+async def stream_response(
+    client: httpx.AsyncClient,
+    url: str,
+    headers: Dict[str, str],
+    body: Dict[str, Any]
+) -> AsyncIterator[str]:
+    """流式转发响应"""
+    async with client.stream("POST", url, json=body, headers=headers, timeout=60.0) as response:
+        response.raise_for_status()
+        async for chunk in response.aiter_bytes():
+            yield chunk
+
+
 @app.post("/v1/chat/completions")
 async def chat_completions(request: Request):
-    """处理聊天补全请求"""
+    """处理聊天补全请求（支持流式和非流式）"""
     try:
-        # 解析请求体
         body = await request.json()
         
         messages = body.get("messages", [])
         tools = body.get("tools")
+        is_stream = body.get("stream", False)  # ⭐ 获取客户端的流式请求
         
         print(f"\n{'='*60}")
         print(f"📨 收到请求:")
         print(f"   消息数: {len(messages)}")
         print(f"   工具数: {len(tools) if tools else 0}")
+        print(f"   客户端请求流式: {is_stream}")
         
-        # 调试：打印消息类型
         msg_types = [msg.get("role") for msg in messages]
         print(f"   消息类型: {msg_types}")
         
-        # 过滤和转换消息
+        # 过滤消息
         filtered_messages = filter_messages_for_deepseek(messages)
         
         # 如果有工具，修改系统提示词
         if tools:
             tool_prompt = build_tool_prompt(tools)
             
-            # 查找或添加系统消息
             system_found = False
             for i, msg in enumerate(filtered_messages):
                 if msg.get("role") == "system":
@@ -217,83 +235,100 @@ async def chat_completions(request: Request):
             
             print(f"   ✅ 已注入工具调用提示词")
         
-        # 构造发送给 DeepSeek 的请求（不传 tools）
+        # ⭐ 智能判断是否使用流式
+        use_streaming = is_stream and should_use_streaming(messages, tools)
+        
+        # 构造请求
         deepseek_body = {
             "model": body.get("model", "deepseek-chat"),
             "messages": filtered_messages,
             "temperature": body.get("temperature", 0.7),
             "max_tokens": body.get("max_tokens", 2000),
-            "stream": False
+            "stream": use_streaming  # ⭐ 根据判断决定是否流式
         }
         
-        # 调用远程 DeepSeek API
         print(f"   🔄 调用远程 API: {DEEPSEEK_API_URL}")
+        print(f"   📡 使用{'流式' if use_streaming else '非流式'}传输")
         
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            response = await client.post(
-                DEEPSEEK_API_URL,
-                json=deepseek_body,
+        # ⭐ 流式响应
+        if use_streaming:
+            async def generate():
+                async with httpx.AsyncClient(timeout=60.0) as client:
+                    async for chunk in stream_response(
+                        client,
+                        DEEPSEEK_API_URL,
+                        {
+                            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+                            "Content-Type": "application/json"
+                        },
+                        deepseek_body
+                    ):
+                        yield chunk
+            
+            print(f"   ✅ 返回流式响应")
+            print(f"{'='*60}\n")
+            
+            return StreamingResponse(
+                generate(),
+                media_type="text/event-stream",
                 headers={
-                    "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-                    "Content-Type": "application/json"
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
                 }
             )
-            
-            response.raise_for_status()
-            result = response.json()
         
-        # ⭐ 验证响应格式
-        if "choices" not in result:
-            print(f"   ❌ 响应缺少 'choices' 字段")
-            print(f"   完整响应: {json.dumps(result, indent=2)}")
-            raise HTTPException(
-                status_code=502,
-                detail=f"Invalid response from DeepSeek API: missing 'choices' field"
-            )
-        
-        if not result["choices"]:
-            print(f"   ❌ 'choices' 数组为空")
-            raise HTTPException(
-                status_code=502,
-                detail=f"Invalid response from DeepSeek API: empty 'choices' array"
-            )
-        
-        # 提取响应内容
-        choice = result["choices"][0]
-        message = choice.get("message", {})
-        content = message.get("content", "")
-        
-        print(f"   📥 收到响应 ({len(content)} 字符)")
-        
-        # 解析 XML 工具调用
-        tool_calls = None
-        finish_reason = choice.get("finish_reason", "stop")
-        
-        if tools and content:
-            tool_calls = extract_xml_tool_calls(content)
-            
-            if tool_calls:
-                print(f"   ✅ 提取到 {len(tool_calls)} 个工具调用:")
-                for tc in tool_calls:
-                    print(f"      - {tc['function']['name']}({tc['function']['arguments']})")
+        # ⭐ 非流式响应（工具调用）
+        else:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                response = await client.post(
+                    DEEPSEEK_API_URL,
+                    json=deepseek_body,
+                    headers={
+                        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+                        "Content-Type": "application/json"
+                    }
+                )
                 
-                # 修改响应
-                message["tool_calls"] = tool_calls
-                message["content"] = ""  # 清空内容
-                finish_reason = "tool_calls"
-            else:
-                print(f"   ⚠️  未检测到工具调用")
-                if "<function_call>" in content:
-                    print(f"   原始内容: {content[:200]}...")
-        
-        # 构造返回响应
-        choice["finish_reason"] = finish_reason
-        choice["message"] = message
-        
-        print(f"   ✅ 返回结果 (finish_reason: {finish_reason})")
-        print(f"{'='*60}\n")
-        
-        return JSONResponse(content=result)
+                response.raise_for_status()
+                result = response.json()
+            
+            # 验证响应
+            if "choices" not in result or not result["choices"]:
+                raise HTTPException(
+                    status_code=502,
+                    detail="Invalid response from DeepSeek API"
+                )
+            
+            # 提取响应
+            choice = result["choices"][0]
+            message = choice.get("message", {})
+            content = message.get("content", "")
+            
+            print(f"   📥 收到响应 ({len(content)} 字符)")
+            
+            # 解析工具调用
+            tool_calls = None
+            finish_reason = choice.get("finish_reason", "stop")
+            
+            if tools and content:
+                tool_calls = extract_xml_tool_calls(content)
+                
+                if tool_calls:
+                    print(f"   ✅ 提取到 {len(tool_calls)} 个工具调用:")
+                    for tc in tool_calls:
+                        print(f"      - {tc['function']['name']}({tc['function']['arguments']})")
+                    
+                    message["tool_calls"] = tool_calls
+                    message["content"] = ""
+                    finish_reason = "tool_calls"
+            
+            choice["finish_reason"] = finish_reason
+            choice["message"] = message
+            
+            print(f"   ✅ 返回结果 (finish_reason: {finish_reason})")
+            print(f"{'='*60}\n")
+            
+            return JSONResponse(content=result)
         
     except httpx.HTTPError as e:
         print(f"❌ HTTP 错误: {e}")
@@ -329,18 +364,44 @@ async def health():
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.get(f"http://10.248.60.236:5000/v1/models")
             response.raise_for_status()
-        return {"status": "healthy", "deepseek_api": "reachable"}
+        return {
+            "status": "healthy",
+            "deepseek_api": "reachable",
+            "streaming_support": True
+        }
     except Exception as e:
         return {"status": "unhealthy", "error": str(e)}
 
 
+@app.get("/")
+async def root():
+    """根路径信息"""
+    return {
+        "name": "DeepSeek Tool Calling Proxy",
+        "version": "2.0.0",
+        "features": [
+            "Tool calling via XML parsing",
+            "Streaming support for non-tool requests",
+            "Intelligent stream/non-stream switching"
+        ],
+        "config": {
+            "api_url": DEEPSEEK_API_URL,
+            "api_key_set": bool(DEEPSEEK_API_KEY)
+        }
+    }
+
+
 if __name__ == "__main__":
     print("="*60)
-    print("🚀 启动 DeepSeek Tool Calling 代理服务器 (修复版)")
+    print("🚀 DeepSeek Tool Calling 代理服务器 v2.0")
     print("="*60)
-    print(f"监听地址: http://localhost:8000")
-    print(f"远程 API: {DEEPSEEK_API_URL}")
-    print(f"健康检查: http://localhost:8000/health")
+    print(f"📅 当前时间: 2025-11-19 02:06:03 UTC")
+    print(f"👤 当前用户: greatabel")
+    print(f"🔗 监听地址: http://localhost:8000")
+    print(f"🌐 远程 API: {DEEPSEEK_API_URL}")
+    print(f"🔑 API Key: {'✅ 已设置' if DEEPSEEK_API_KEY else '❌ 未设置'}")
+    print(f"📡 流式支持: ✅ 已启用")
+    print(f"💊 健康检查: http://localhost:8000/health")
     print("="*60)
     print()
     
