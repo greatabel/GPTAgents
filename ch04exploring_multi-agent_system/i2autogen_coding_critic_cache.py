@@ -1,8 +1,23 @@
-# snake_game_minimal_fix.py
+# snake_game_with_cache_fixed.py
+"""
+Snake 游戏开发 - 带缓存的修复版
+"""
+
 from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
+from autogen.cache import Cache
+
+print("="*60)
+print("🎮 demo(Fixed)")
+print("="*60)
+print(f"📅 Date: 2025-11-19 15:27:05 UTC")
+print(f"👤 User: greatabel")
+print()
 
 # Load the configuration list from the config file.
 config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
+
+print(f"✅ Config loaded: {config_list[0]['model']}")
+print()
 
 # Create the agent that represents the user in the conversation.
 user_proxy = UserProxyAgent(
@@ -12,9 +27,9 @@ user_proxy = UserProxyAgent(
         "use_docker": False,
         "last_n_messages": 1,
     },
-    human_input_mode="TERMINATE",  # ⭐ 修改 1: ALWAYS → TERMINATE
+    human_input_mode="TERMINATE",  # ⭐ 修改 1
     is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
-    max_consecutive_auto_reply=10,  # ⭐ 修改 2: 添加这行
+    max_consecutive_auto_reply=10,  # ⭐ 修改 2
 )
 
 engineer = AssistantAgent(
@@ -56,11 +71,27 @@ user_proxy.register_nested_chats(
             "max_turns": 3,
         }
     ],
-    trigger=engineer,  # condition=my_condition,
+    trigger=engineer,
 )
 
-task = """Write a demo game using Pygame."""
+task = """Write a small demo using python."""
 
-res = user_proxy.initiate_chat(
-    recipient=engineer, message=task, max_turns=3, summary_method="last_msg"  # ⭐ 修改 3: 2 → 5
-)
+print("🗄️  Using disk cache (seed=42)...")
+print("💡 Tip: Run again to see cache in action!")
+print()
+
+with Cache.disk(cache_seed=42) as cache:
+    res = user_proxy.initiate_chat(
+        recipient=engineer,
+        message=task,
+        max_turns=5,  # ⭐ 修改 3: 2 → 5
+        summary_method="last_msg",
+        cache=cache,
+    )
+
+print()
+print("="*60)
+print("📊 Conversation Summary")
+print("="*60)
+print(res.summary[:200] + "..." if len(res.summary) > 200 else res.summary)
+print()
