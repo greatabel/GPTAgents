@@ -11,6 +11,9 @@ from typing import Any, Dict, List, Optional, AsyncIterator
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
 import uvicorn
+from datetime import datetime, timedelta
+
+
 
 app = FastAPI(title="DeepSeek Tool Calling Proxy")
 
@@ -208,7 +211,10 @@ async def chat_completions(request: Request):
             role = first_msg.get("role", "unknown")
             content = first_msg.get("content", "")
             content_preview = content[:100] + "..." if len(content) > 100 else content
-            print(f"   首条消息: [{role}] {content_preview}")
+            
+            current_time = (datetime.utcnow() + timedelta(hours=8)).strftime("%H:%M:%S")
+            print(f"   [{current_time}] 首条消息: [{role}] {content_preview}")
+
 
         print(f"   消息数: {len(messages)}")
         print(f"   工具数: {len(tools) if tools else 0}")
