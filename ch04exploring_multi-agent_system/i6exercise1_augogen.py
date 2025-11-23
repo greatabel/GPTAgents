@@ -52,7 +52,7 @@ user_proxy.register_nested_chats(
             "recipient": critic,
             "message": review_code,
             "summary_method": "last_msg",
-            "max_turns": 3,
+            "max_turns": 1,
         }
     ],
     trigger=engineer,
@@ -71,6 +71,6 @@ task = """
 res = user_proxy.initiate_chat(
     recipient=engineer,
     message=task,
-    max_turns=3,
+    max_turns=1,
     summary_method="last_msg"
 )
