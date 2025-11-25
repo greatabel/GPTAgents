@@ -210,7 +210,7 @@ async def chat_completions(request: Request):
             first_msg = messages[0]
             role = first_msg.get("role", "unknown")
             content = first_msg.get("content", "")
-            content_preview = content[:100] + "..." if len(content) > 100 else content
+            content_preview = content[:150] + "..." if len(content) > 150 else content
             
             current_time = (datetime.utcnow() + timedelta(hours=8)).strftime("%H:%M:%S")
             print(f"   [{current_time}] 首条消息: [{role}] {content_preview}")
