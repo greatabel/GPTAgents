@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import os
 
-# treamlit run i1chatgpt_clone_response.py
+# streamlit run i1chatgpt_clone_response.py
 
 load_dotenv()
 
