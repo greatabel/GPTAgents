@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 # 建议这里存的是你 proxy 的 key，比如：
-# OPENAI_API_KEY=sk-demoA9q7KX
+
 api_key = os.getenv('EMBEDDING_API_KEY')
 if not api_key:
     raise ValueError("No API key found. Please check your .env file.")
