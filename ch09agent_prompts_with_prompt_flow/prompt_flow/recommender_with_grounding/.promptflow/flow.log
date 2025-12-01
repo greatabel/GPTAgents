@@ -1,0 +1,16 @@
+2025-12-01 10:50:18 +0800   80923 execution          WARNING  Output 'recommendations' references a reduce node 'aggregation', will not take effect.
+2025-12-01 10:50:18 +0800   80923 execution          WARNING  Output 'recommendations' references a reduce node 'aggregation', will not take effect.
+2025-12-01 10:50:18 +0800   80923 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-01 10:50:18 +0800   80923 execution.flow     INFO     Start to run 4 nodes with concurrency level 16.
+2025-12-01 10:50:18 +0800   80923 execution.flow     INFO     Executing node recommender. node run id: 62d35b71-def6-48c4-bdb1-4c2ac7062839_recommender_0
+2025-12-01 10:50:28 +0800   80923 execution.flow     INFO     Node recommender completes.
+2025-12-01 10:50:28 +0800   80923 execution.flow     INFO     Executing node evaluate_recommendation. node run id: 62d35b71-def6-48c4-bdb1-4c2ac7062839_evaluate_recommendation_0
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Node evaluate_recommendation completes.
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Executing node parsing_results. node run id: 62d35b71-def6-48c4-bdb1-4c2ac7062839_parsing_results_0
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Node parsing_results completes.
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Executing node grounding. node run id: 62d35b71-def6-48c4-bdb1-4c2ac7062839_grounding_0
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Node grounding completes.
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Start to run 1 nodes with concurrency level 16.
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Executing node aggregation. node run id: 62d35b71-def6-48c4-bdb1-4c2ac7062839_aggregation_reduce
+2025-12-01 10:50:32 +0800   80923 execution.flow     INFO     Node aggregation completes.

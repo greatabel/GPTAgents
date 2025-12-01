@@ -1,0 +1,315 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "subject": "time travel",
+        "genre": "fantasy",
+        "format": "movies",
+        "custom": "Please don't include any romantic comedies or the romance genre."
+      },
+      "output": {
+        "line_number": 0
+      },
+      "metrics": {
+        "subject": 15.0,
+        "format": 15.0,
+        "genre": 13.0,
+        "avg_score": 14.34
+      },
+      "request": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "root_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2025-12-01T02:50:18.325606Z",
+      "end_time": "2025-12-01T02:50:32.712398Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "flow",
+          "node_name": "flow",
+          "type": "Flow",
+          "start_time": 1764528618.325606,
+          "end_time": 1764528632.712398,
+          "children": [],
+          "system_metrics": {
+            "duration": 14.386792,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "inputs": {
+            "subject": "time travel",
+            "genre": "fantasy",
+            "format": "movies",
+            "custom": "Please don't include any romantic comedies or the romance genre."
+          },
+          "output": {},
+          "error": null
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 14.386792,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "result": {
+        "line_number": 0
+      },
+      "upload_metrics": false,
+      "otel_trace_id": null,
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "recommender",
+      "flow_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_recommender_0",
+      "status": "Completed",
+      "inputs": {
+        "temperature": 1.0,
+        "max_tokens": 256,
+        "model": "gpt-4-1106-preview",
+        "subject": "time travel",
+        "genre": "fantasy",
+        "format": "movies",
+        "custom": "Please don't include any romantic comedies or the romance genre.",
+        "_inputs_to_escape": [
+          "subject",
+          "genre",
+          "format",
+          "custom"
+        ]
+      },
+      "output": "Of course! Based on your request for time travel and fantasy movies, and excluding romantic comedies and the romance genre, here are three excellent recommendations:\n\n1.  **The Adam Project (2022)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** A fantastic and fun action-adventure where a man travels back in time to team up with his younger self and their late father to save the future. The time travel mechanics are central to the plot, and the story is more focused on family, action, and adventure than on romance.\n\n2.  **Avengers: Endgame (2019)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** While primarily a superhero film, its entire third act is a massive, high-stakes time travel heist through the MCU's own history. The fantasy elements come from the superpowers, alien tech, and magical artifacts (like the Infinity Stones). The plot is driven by mission and sacrifice, not romance.\n\n3.  **Army of Darkness (1992)**\n    *   **Genre:** Fantasy, Horror, Comedy\n    *   **Why it fits:** This cult classic throws a",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_0",
+      "start_time": "2025-12-01T02:50:18.326236Z",
+      "end_time": "2025-12-01T02:50:28.813556Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 10.48732
+      },
+      "result": "Of course! Based on your request for time travel and fantasy movies, and excluding romantic comedies and the romance genre, here are three excellent recommendations:\n\n1.  **The Adam Project (2022)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** A fantastic and fun action-adventure where a man travels back in time to team up with his younger self and their late father to save the future. The time travel mechanics are central to the plot, and the story is more focused on family, action, and adventure than on romance.\n\n2.  **Avengers: Endgame (2019)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** While primarily a superhero film, its entire third act is a massive, high-stakes time travel heist through the MCU's own history. The fantasy elements come from the superpowers, alien tech, and magical artifacts (like the Infinity Stones). The plot is driven by mission and sacrifice, not romance.\n\n3.  **Army of Darkness (1992)**\n    *   **Genre:** Fantasy, Horror, Comedy\n    *   **Why it fits:** This cult classic throws a",
+      "message_format": "basic"
+    },
+    {
+      "node": "evaluate_recommendation",
+      "flow_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_evaluate_recommendation_0",
+      "status": "Completed",
+      "inputs": {
+        "model": "gpt-4-1106-preview",
+        "subject": "time travel",
+        "format": "movies",
+        "genre": "fantasy",
+        "custom": "Please don't include any romantic comedies or the romance genre.",
+        "recommendations": "Of course! Based on your request for time travel and fantasy movies, and excluding romantic comedies and the romance genre, here are three excellent recommendations:\n\n1.  **The Adam Project (2022)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** A fantastic and fun action-adventure where a man travels back in time to team up with his younger self and their late father to save the future. The time travel mechanics are central to the plot, and the story is more focused on family, action, and adventure than on romance.\n\n2.  **Avengers: Endgame (2019)**\n    *   **Genre:** Action, Adventure, Sci-Fi\n    *   **Why it fits:** While primarily a superhero film, its entire third act is a massive, high-stakes time travel heist through the MCU's own history. The fantasy elements come from the superpowers, alien tech, and magical artifacts (like the Infinity Stones). The plot is driven by mission and sacrifice, not romance.\n\n3.  **Army of Darkness (1992)**\n    *   **Genre:** Fantasy, Horror, Comedy\n    *   **Why it fits:** This cult classic throws a",
+        "temperature": 0.0,
+        "_inputs_to_escape": [
+          "subject",
+          "format",
+          "genre",
+          "custom"
+        ]
+      },
+      "output": "Title: The Adam Project\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Army of Darkness\nSubject: 5\nFormat: 5\nGenre: 5",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_0",
+      "start_time": "2025-12-01T02:50:28.814765Z",
+      "end_time": "2025-12-01T02:50:32.697420Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 3.882655
+      },
+      "result": "Title: The Adam Project\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Army of Darkness\nSubject: 5\nFormat: 5\nGenre: 5",
+      "message_format": "basic"
+    },
+    {
+      "node": "parsing_results",
+      "flow_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_parsing_results_0",
+      "status": "Completed",
+      "inputs": {
+        "input": "Title: The Adam Project\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 4\n\nTitle: Army of Darkness\nSubject: 5\nFormat: 5\nGenre: 5"
+      },
+      "output": "[{\"title\": \"The Adam Project\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Avengers\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Army of Darkness\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"5\"}]",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_0",
+      "start_time": "2025-12-01T02:50:32.700778Z",
+      "end_time": "2025-12-01T02:50:32.701824Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.001046
+      },
+      "result": "[{\"title\": \"The Adam Project\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Avengers\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Army of Darkness\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"5\"}]",
+      "message_format": "basic"
+    },
+    {
+      "node": "grounding",
+      "flow_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_grounding_0",
+      "status": "Completed",
+      "inputs": {
+        "inputs": "[{\"title\": \"The Adam Project\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Avengers\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"4\"}, {\"title\": \"Army of Darkness\", \"subject\": \"5\", \"format\": \"5\", \"genre\": \"5\"}]"
+      },
+      "output": [
+        {
+          "title": "The Adam Project",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 4.0,
+          "avg_score": 4.67
+        },
+        {
+          "title": "Avengers",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 4.0,
+          "avg_score": 4.67
+        },
+        {
+          "title": "Army of Darkness",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 5.0,
+          "avg_score": 5.0
+        }
+      ],
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_0",
+      "start_time": "2025-12-01T02:50:32.703017Z",
+      "end_time": "2025-12-01T02:50:32.705238Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.002221
+      },
+      "result": [
+        {
+          "title": "The Adam Project",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 4.0,
+          "avg_score": 4.67
+        },
+        {
+          "title": "Avengers",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 4.0,
+          "avg_score": 4.67
+        },
+        {
+          "title": "Army of Darkness",
+          "subject": 5.0,
+          "format": 5.0,
+          "genre": 5.0,
+          "avg_score": 5.0
+        }
+      ],
+      "message_format": "basic"
+    },
+    {
+      "node": "aggregation",
+      "flow_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839_aggregation_reduce",
+      "status": "Completed",
+      "inputs": {
+        "processed_results": [
+          [
+            {
+              "title": "The Adam Project",
+              "subject": 5.0,
+              "format": 5.0,
+              "genre": 4.0,
+              "avg_score": 4.67
+            },
+            {
+              "title": "Avengers",
+              "subject": 5.0,
+              "format": 5.0,
+              "genre": 4.0,
+              "avg_score": 4.67
+            },
+            {
+              "title": "Army of Darkness",
+              "subject": 5.0,
+              "format": 5.0,
+              "genre": 5.0,
+              "avg_score": 5.0
+            }
+          ]
+        ]
+      },
+      "output": {
+        "subject": 15.0,
+        "format": 15.0,
+        "genre": 13.0,
+        "avg_score": 14.34
+      },
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "62d35b71-def6-48c4-bdb1-4c2ac7062839",
+      "start_time": "2025-12-01T02:50:32.714177Z",
+      "end_time": "2025-12-01T02:50:32.714685Z",
+      "index": null,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.000508
+      },
+      "result": {
+        "subject": 15.0,
+        "format": 15.0,
+        "genre": 13.0,
+        "avg_score": 14.34
+      },
+      "message_format": "basic"
+    }
+  ]
+}
