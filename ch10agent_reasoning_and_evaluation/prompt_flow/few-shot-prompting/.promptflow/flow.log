@@ -1,0 +1,9 @@
+2025-12-02 00:40:19 +0800    6724 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-02 00:40:19 +0800    6724 execution.flow     INFO     Start to run 4 nodes with concurrency level 16.
+2025-12-02 00:40:19 +0800    6724 execution.flow     INFO     Executing node few_shot. node run id: 383710a5-9891-4b91-9ca9-e9745d0f35ef_few_shot_0
+2025-12-02 00:40:19 +0800    6724 execution.flow     INFO     Executing node Embedding_expected. node run id: 383710a5-9891-4b91-9ca9-e9745d0f35ef_Embedding_expected_0
+2025-12-02 00:40:20 +0800    6724 execution.flow     INFO     Node Embedding_expected completes.
+2025-12-02 00:41:19 +0800    6724 execution          WARNING  [few_shot in line 0 (index starts from 0)] stderr> Exception occurs: InternalServerError: Error code: 502 - {'detail': 'DeepSeek API error: '}
+2025-12-02 00:41:19 +0800    6724 execution          WARNING  [few_shot in line 0 (index starts from 0)] stderr> InternalServerError #0, but no Retry-After header, Back off 3 seconds for retry.
+2025-12-02 00:41:27 +0800    6724 execution.flow     INFO     Received signal 2(SIGINT), start to exit sync flow execution.
+2025-12-02 00:41:27 +0800    6724 execution.flow     INFO     Received KeyboardInterrupt, cancel the run.
