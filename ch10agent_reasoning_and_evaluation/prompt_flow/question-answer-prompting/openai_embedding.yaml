@@ -1,0 +1,3 @@
+type: open_ai
+api_key: sk-demoA9q7KX
+base_url: http://10.248.10.54:5000/v1

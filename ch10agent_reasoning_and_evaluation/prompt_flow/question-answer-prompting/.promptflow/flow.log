@@ -1,0 +1,10 @@
+2025-12-01 15:24:51 +0800   88450 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-01 15:24:51 +0800   88450 execution.flow     INFO     Start to run 4 nodes with concurrency level 16.
+2025-12-01 15:24:51 +0800   88450 execution.flow     INFO     Executing node question_answer. node run id: 106ae91f-9381-4fb8-a7e2-86197a926d54_question_answer_0
+2025-12-01 15:24:51 +0800   88450 execution.flow     INFO     Executing node Embedding_expected. node run id: 106ae91f-9381-4fb8-a7e2-86197a926d54_Embedding_expected_0
+2025-12-01 15:24:51 +0800   88450 execution.flow     INFO     Node Embedding_expected completes.
+2025-12-01 15:24:57 +0800   88450 execution.flow     INFO     Node question_answer completes.
+2025-12-01 15:24:57 +0800   88450 execution.flow     INFO     Executing node Embedding_predicted. node run id: 106ae91f-9381-4fb8-a7e2-86197a926d54_Embedding_predicted_0
+2025-12-01 15:24:57 +0800   88450 execution.flow     INFO     Node Embedding_predicted completes.
+2025-12-01 15:24:57 +0800   88450 execution.flow     INFO     Executing node evaluate. node run id: 106ae91f-9381-4fb8-a7e2-86197a926d54_evaluate_0
+2025-12-01 15:24:57 +0800   88450 execution.flow     INFO     Node evaluate completes.

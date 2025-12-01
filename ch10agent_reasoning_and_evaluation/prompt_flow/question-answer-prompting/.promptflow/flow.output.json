@@ -1,0 +1,7 @@
+{
+  "predicted": "Marty traveled back 30 years, from 1985 to 1955.",
+  "expected": "Marty traveled back in time 30 years.",
+  "evaluation_score": 0.9542323900023816,
+  "question": "How far did Marty travel back in time in the movie Back to the Future (1985)",
+  "context": "Back to the Future (1985)\n\n    Setting: 1985 and 1955 in Hill Valley, California.\n    Main Characters: Marty McFly (Michael J. Fox), Dr. Emmett \"Doc\" Brown (Christopher\nLloyd).\n    Plot Points:\n        Marty McFly is accidentally sent back to 1955 in a time-traveling DeLorean\ninvented by his friend, Doc Brown.\n        Marty meets his future parents in high school and accidentally alters\nthe course of their romance.\n        He seeks the 1955 version of Doc Brown to help him return to 1985.\n        Marty must repair his parents' relationship to ensure his own existence.\n        He successfully returns to 1985, finding some positive changes in his\nfamily.\n        The film ends with Doc taking Marty and his girlfriend, Jennifer, to\nthe future to address a problem with their children."
+}
