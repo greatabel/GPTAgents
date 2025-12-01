@@ -1,0 +1,273 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "subject": "time travel",
+        "genre": "fantasy",
+        "format": "movies",
+        "custom": "Please don't include any romantic comedies or the romance genre."
+      },
+      "output": {
+        "recommendations": [
+          {
+            "title": "Edge of Tomorrow",
+            "subject": "5",
+            "format": "5",
+            "genre": "5"
+          },
+          {
+            "title": "Avengers",
+            "subject": "5",
+            "format": "5",
+            "genre": "5"
+          },
+          {
+            "title": "The Chronicles of Narnia",
+            "subject": "1",
+            "format": "5",
+            "genre": "5"
+          }
+        ]
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8",
+      "root_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2025-12-01T02:18:28.748783Z",
+      "end_time": "2025-12-01T02:18:54.898170Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "flow",
+          "node_name": "flow",
+          "type": "Flow",
+          "start_time": 1764526708.748783,
+          "end_time": 1764526734.89817,
+          "children": [],
+          "system_metrics": {
+            "duration": 26.149387,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "inputs": {
+            "subject": "time travel",
+            "genre": "fantasy",
+            "format": "movies",
+            "custom": "Please don't include any romantic comedies or the romance genre."
+          },
+          "output": {
+            "recommendations": [
+              {
+                "title": "Edge of Tomorrow",
+                "subject": "5",
+                "format": "5",
+                "genre": "5"
+              },
+              {
+                "title": "Avengers",
+                "subject": "5",
+                "format": "5",
+                "genre": "5"
+              },
+              {
+                "title": "The Chronicles of Narnia",
+                "subject": "1",
+                "format": "5",
+                "genre": "5"
+              }
+            ]
+          },
+          "error": null
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 26.149387,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "result": {
+        "recommendations": [
+          {
+            "title": "Edge of Tomorrow",
+            "subject": "5",
+            "format": "5",
+            "genre": "5"
+          },
+          {
+            "title": "Avengers",
+            "subject": "5",
+            "format": "5",
+            "genre": "5"
+          },
+          {
+            "title": "The Chronicles of Narnia",
+            "subject": "1",
+            "format": "5",
+            "genre": "5"
+          }
+        ]
+      },
+      "upload_metrics": false,
+      "otel_trace_id": null,
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "recommender",
+      "flow_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8",
+      "run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_recommender_0",
+      "status": "Completed",
+      "inputs": {
+        "temperature": 1.0,
+        "max_tokens": 256,
+        "model": "gpt-4-1106-preview",
+        "subject": "time travel",
+        "genre": "fantasy",
+        "format": "movies",
+        "custom": "Please don't include any romantic comedies or the romance genre.",
+        "_inputs_to_escape": [
+          "subject",
+          "genre",
+          "format",
+          "custom"
+        ]
+      },
+      "output": "Of course! Based on your request for time travel and fantasy films, while excluding romance and romantic comedies, here are three excellent recommendations:\n\n1.  **Edge of Tomorrow**\n    *   **Why it fits:** This is a brilliant blend of sci-fi time travel and fantasy-action. A soldier fighting in a war against alien invaders is forced to relive the same brutal day over and over, becoming a better fighter each time. The fantasy element comes from the alien technology that enables the time loop and the nature of the alien enemy itself. The focus is squarely on action, strategy, and survival, with no significant romantic subplot.\n\n2.  **Avengers: Endgame**\n    *   **Why it fits:** While rooted in the superhero genre, the core plot of this film is a large-scale, high-stakes time travel heist. The heroes use quantum realm technology to travel back through the Marvel Cinematic Universe's history. The entire premise is deeply fantastical, featuring superheroes, magic, and advanced technology. Romance is a minor, background element at best, with the focus being entirely on the mission to save the universe.\n\n3.  **The Chronicles of Narnia: The Lion, the Witch and the Wardrobe**\n    *  ",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_0",
+      "start_time": "2025-12-01T02:18:28.749579Z",
+      "end_time": "2025-12-01T02:18:35.813620Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 7.064041
+      },
+      "result": "Of course! Based on your request for time travel and fantasy films, while excluding romance and romantic comedies, here are three excellent recommendations:\n\n1.  **Edge of Tomorrow**\n    *   **Why it fits:** This is a brilliant blend of sci-fi time travel and fantasy-action. A soldier fighting in a war against alien invaders is forced to relive the same brutal day over and over, becoming a better fighter each time. The fantasy element comes from the alien technology that enables the time loop and the nature of the alien enemy itself. The focus is squarely on action, strategy, and survival, with no significant romantic subplot.\n\n2.  **Avengers: Endgame**\n    *   **Why it fits:** While rooted in the superhero genre, the core plot of this film is a large-scale, high-stakes time travel heist. The heroes use quantum realm technology to travel back through the Marvel Cinematic Universe's history. The entire premise is deeply fantastical, featuring superheroes, magic, and advanced technology. Romance is a minor, background element at best, with the focus being entirely on the mission to save the universe.\n\n3.  **The Chronicles of Narnia: The Lion, the Witch and the Wardrobe**\n    *  ",
+      "message_format": "basic"
+    },
+    {
+      "node": "evaluate_recommendation",
+      "flow_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8",
+      "run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_evaluate_recommendation_0",
+      "status": "Completed",
+      "inputs": {
+        "model": "gpt-4-1106-preview",
+        "subject": "time travel",
+        "format": "movies",
+        "genre": "fantasy",
+        "custom": "Please don't include any romantic comedies or the romance genre.",
+        "recommendations": "Of course! Based on your request for time travel and fantasy films, while excluding romance and romantic comedies, here are three excellent recommendations:\n\n1.  **Edge of Tomorrow**\n    *   **Why it fits:** This is a brilliant blend of sci-fi time travel and fantasy-action. A soldier fighting in a war against alien invaders is forced to relive the same brutal day over and over, becoming a better fighter each time. The fantasy element comes from the alien technology that enables the time loop and the nature of the alien enemy itself. The focus is squarely on action, strategy, and survival, with no significant romantic subplot.\n\n2.  **Avengers: Endgame**\n    *   **Why it fits:** While rooted in the superhero genre, the core plot of this film is a large-scale, high-stakes time travel heist. The heroes use quantum realm technology to travel back through the Marvel Cinematic Universe's history. The entire premise is deeply fantastical, featuring superheroes, magic, and advanced technology. Romance is a minor, background element at best, with the focus being entirely on the mission to save the universe.\n\n3.  **The Chronicles of Narnia: The Lion, the Witch and the Wardrobe**\n    *  ",
+        "temperature": 0.0,
+        "_inputs_to_escape": [
+          "subject",
+          "format",
+          "genre",
+          "custom"
+        ]
+      },
+      "output": "Title: Edge of Tomorrow\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: The Chronicles of Narnia: The Lion, the Witch and the Wardrobe\nSubject: 1\nFormat: 5\nGenre: 5",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_0",
+      "start_time": "2025-12-01T02:18:35.814801Z",
+      "end_time": "2025-12-01T02:18:54.888225Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 19.073424
+      },
+      "result": "Title: Edge of Tomorrow\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: The Chronicles of Narnia: The Lion, the Witch and the Wardrobe\nSubject: 1\nFormat: 5\nGenre: 5",
+      "message_format": "basic"
+    },
+    {
+      "node": "parsing_results",
+      "flow_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8",
+      "run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_parsing_results_0",
+      "status": "Completed",
+      "inputs": {
+        "input": "Title: Edge of Tomorrow\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: Avengers: Endgame\nSubject: 5\nFormat: 5\nGenre: 5\n\nTitle: The Chronicles of Narnia: The Lion, the Witch and the Wardrobe\nSubject: 1\nFormat: 5\nGenre: 5"
+      },
+      "output": [
+        {
+          "title": "Edge of Tomorrow",
+          "subject": "5",
+          "format": "5",
+          "genre": "5"
+        },
+        {
+          "title": "Avengers",
+          "subject": "5",
+          "format": "5",
+          "genre": "5"
+        },
+        {
+          "title": "The Chronicles of Narnia",
+          "subject": "1",
+          "format": "5",
+          "genre": "5"
+        }
+      ],
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "c49bdfa7-1960-4dcd-b8cf-f84eb692cce8_0",
+      "start_time": "2025-12-01T02:18:54.893369Z",
+      "end_time": "2025-12-01T02:18:54.893804Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.000435
+      },
+      "result": [
+        {
+          "title": "Edge of Tomorrow",
+          "subject": "5",
+          "format": "5",
+          "genre": "5"
+        },
+        {
+          "title": "Avengers",
+          "subject": "5",
+          "format": "5",
+          "genre": "5"
+        },
+        {
+          "title": "The Chronicles of Narnia",
+          "subject": "1",
+          "format": "5",
+          "genre": "5"
+        }
+      ],
+      "message_format": "basic"
+    }
+  ]
+}
