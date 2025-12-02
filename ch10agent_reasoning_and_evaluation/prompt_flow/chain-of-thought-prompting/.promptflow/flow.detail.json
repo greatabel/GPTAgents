@@ -1,0 +1,144 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+        "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n"
+      },
+      "output": {
+        "predicted": "Final year: 2060  \nMax’s age: 65",
+        "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n",
+        "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+        "evaluation_score": "0"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6",
+      "root_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2025-12-02T11:20:13.746003Z",
+      "end_time": "2025-12-02T11:20:17.271243Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "flow",
+          "node_name": "flow",
+          "type": "Flow",
+          "start_time": 1764645613.746003,
+          "end_time": 1764645617.271243,
+          "children": [],
+          "system_metrics": {
+            "duration": 3.52524,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0
+          },
+          "inputs": {
+            "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+            "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n"
+          },
+          "output": {
+            "predicted": "Final year: 2060  \nMax’s age: 65",
+            "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n",
+            "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+            "evaluation_score": "0"
+          },
+          "error": null
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 3.52524,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0
+      },
+      "result": {
+        "predicted": "Final year: 2060  \nMax’s age: 65",
+        "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n",
+        "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+        "evaluation_score": "0"
+      },
+      "upload_metrics": false,
+      "otel_trace_id": null,
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "cot",
+      "flow_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6",
+      "run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6_cot_0",
+      "status": "Completed",
+      "inputs": {
+        "temperature": 1.0,
+        "max_tokens": 256,
+        "model": "gpt-4-1106-preview",
+        "statement": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+        "_inputs_to_escape": [
+          "statement"
+        ]
+      },
+      "output": "Final year: 2060  \nMax’s age: 65",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6_0",
+      "start_time": "2025-12-02T11:20:13.746618Z",
+      "end_time": "2025-12-02T11:20:14.568433Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.821815
+      },
+      "result": "Final year: 2060  \nMax’s age: 65",
+      "message_format": "basic"
+    },
+    {
+      "node": "evaluate_answer",
+      "flow_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6",
+      "run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6_evaluate_answer_0",
+      "status": "Completed",
+      "inputs": {
+        "model": "gpt-4-1106-preview",
+        "expected": "After the final jump, Max finds himself in the year 1980 and he is 75 years old.\n",
+        "predicted": "Final year: 2060  \nMax’s age: 65",
+        "problem": "In a complex time travel movie plot, Max, a 25 year old scientist, discovers a pattern in historical events that repeats every 40 years. To study this pattern, he starts in the year 2300 and travels back in increments of 40 years. He spends 5 years in each time period studying the event. After studying the event in 1900, he jumps forward 80 years to skip a cycle and lands in a new time period. In what year does he find himself after the final jump and how old is he?\n",
+        "_inputs_to_escape": [
+          "expected",
+          "problem"
+        ]
+      },
+      "output": "0",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "1496b13b-deef-4ce1-b046-d41596bf99c6_0",
+      "start_time": "2025-12-02T11:20:14.569779Z",
+      "end_time": "2025-12-02T11:20:17.270209Z",
+      "index": 0,
+      "api_calls": [],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 2.70043
+      },
+      "result": "0",
+      "message_format": "basic"
+    }
+  ]
+}

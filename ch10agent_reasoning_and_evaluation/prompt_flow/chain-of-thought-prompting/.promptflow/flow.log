@@ -1,0 +1,6 @@
+2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
+2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Executing node cot. node run id: 1496b13b-deef-4ce1-b046-d41596bf99c6_cot_0
+2025-12-02 19:20:14 +0800   78234 execution.flow     INFO     Node cot completes.
+2025-12-02 19:20:14 +0800   78234 execution.flow     INFO     Executing node evaluate_answer. node run id: 1496b13b-deef-4ce1-b046-d41596bf99c6_evaluate_answer_0
+2025-12-02 19:20:17 +0800   78234 execution.flow     INFO     Node evaluate_answer completes.
