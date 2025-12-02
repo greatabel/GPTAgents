@@ -1,0 +1,4 @@
+type: open_ai
+api_key: dummy
+base_url: http://localhost:8000/v1
+

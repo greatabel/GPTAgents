@@ -1,0 +1,10 @@
+2025-12-02 19:09:18 +0800   77916 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-02 19:09:18 +0800   77916 execution.flow     INFO     Start to run 4 nodes with concurrency level 16.
+2025-12-02 19:09:18 +0800   77916 execution.flow     INFO     Executing node zero_shot. node run id: b9023fc9-f313-44e9-b2a8-0f112753d27e_zero_shot_0
+2025-12-02 19:09:18 +0800   77916 execution.flow     INFO     Executing node Embedding_expected. node run id: b9023fc9-f313-44e9-b2a8-0f112753d27e_Embedding_expected_0
+2025-12-02 19:09:18 +0800   77916 execution.flow     INFO     Node Embedding_expected completes.
+2025-12-02 19:09:25 +0800   77916 execution.flow     INFO     Node zero_shot completes.
+2025-12-02 19:09:25 +0800   77916 execution.flow     INFO     Executing node Embedding_predicted. node run id: b9023fc9-f313-44e9-b2a8-0f112753d27e_Embedding_predicted_0
+2025-12-02 19:09:25 +0800   77916 execution.flow     INFO     Node Embedding_predicted completes.
+2025-12-02 19:09:25 +0800   77916 execution.flow     INFO     Executing node evaluate. node run id: b9023fc9-f313-44e9-b2a8-0f112753d27e_evaluate_0
+2025-12-02 19:09:25 +0800   77916 execution.flow     INFO     Node evaluate completes.
