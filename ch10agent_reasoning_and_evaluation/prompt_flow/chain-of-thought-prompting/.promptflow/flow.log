@@ -1,6 +1,6 @@
-2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Start executing nodes in thread pool mode.
-2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
-2025-12-02 19:20:13 +0800   78234 execution.flow     INFO     Executing node cot. node run id: 1496b13b-deef-4ce1-b046-d41596bf99c6_cot_0
-2025-12-02 19:20:14 +0800   78234 execution.flow     INFO     Node cot completes.
-2025-12-02 19:20:14 +0800   78234 execution.flow     INFO     Executing node evaluate_answer. node run id: 1496b13b-deef-4ce1-b046-d41596bf99c6_evaluate_answer_0
-2025-12-02 19:20:17 +0800   78234 execution.flow     INFO     Node evaluate_answer completes.
+2025-12-09 23:50:32 +0800   37695 execution.flow     INFO     Start executing nodes in thread pool mode.
+2025-12-09 23:50:32 +0800   37695 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
+2025-12-09 23:50:32 +0800   37695 execution.flow     INFO     Executing node cot. node run id: 5d0e8526-514e-43c8-a03f-3d985e2f5d60_cot_0
+2025-12-09 23:50:34 +0800   37695 execution.flow     INFO     Node cot completes.
+2025-12-09 23:50:34 +0800   37695 execution.flow     INFO     Executing node evaluate_answer. node run id: 5d0e8526-514e-43c8-a03f-3d985e2f5d60_evaluate_answer_0
+2025-12-09 23:50:36 +0800   37695 execution.flow     INFO     Node evaluate_answer completes.

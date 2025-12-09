@@ -47,7 +47,7 @@ nodes:
     inputs:
       temperature: 1
       max_tokens: 256
-      model: gpt-4-1106-preview
+      model: local-llm-model
       statement: ${inputs.statement}
     connection: local_llm
     api: chat
@@ -58,7 +58,7 @@ nodes:
       type: code
       path: evaluate_answer.jinja2
     inputs:
-      model: gpt-4-1106-preview
+      model: local-llm-model
       expected: ${inputs.expected}
       predicted: ${cot.output}
       problem: ${inputs.statement}
